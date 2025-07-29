@@ -4,7 +4,7 @@ use anchor_lang::system_program::{
     transfer,
 };
 
-declare_id!("22222222222222222222222222222222222222222222");
+declare_id!("9g12A8hRhEQ9aUmrGrMP4QYDs5hJiMMuWBHiscfvjGXk");
 
 #[program]
 pub mod blueshift_anchor_vault {
@@ -54,14 +54,16 @@ transfer(
 
 #[derive(Accounts)]
 pub struct VaultAction <'info> {
-    #[account(mut)]
-    pub signer: Signer<'info>,
-    #[account(
+      #[account(
         mut,
         seeds = [b"vault", signer.key().as_ref()],
         bump,
     )]
     pub vault: SystemAccount<'info>,
+    
+    #[account(mut)]
+    pub signer: Signer<'info>,
+
     pub system_program: Program<'info, System>,
 }
 
